@@ -1,0 +1,72 @@
+﻿body {
+}
+
+.crmeditable {
+    min-width: 100%;
+    border-collapse: collapse;
+    font-family: Microsoft\000020YaHei,SimSun,Tahoma,Arial;
+    font-size: 12px;
+}
+
+    .crmeditable thead {
+        border-bottom: 1px solid #e1e1e1;
+        border-top: 1px solid #e1e1e1;
+        line-height: 30px;
+    }
+
+        .crmeditable thead tr th {
+            border-bottom: 1px solid #e1e1e1;
+            border-top: 1px solid #e1e1e1;
+            border-left: 1px solid #e1e1e1;
+            font-weight: normal;
+            color: #666666;
+            line-height: 20px;
+            text-align: left;
+            padding-left: 3px;
+            cursor:pointer;
+        }
+            .crmeditable thead tr th:hover {
+                background-color: rgb(215, 235, 249);
+            }
+            .crmeditable thead tr th:first-child {
+                border-left: none;
+            }
+
+    .crmeditable tbody tr {
+    }
+
+        .crmeditable tbody tr:hover {
+            background-color: rgb(215, 235, 249);
+        }
+
+    .crmeditable tbody tr {
+        line-height: 25px;
+    }
+
+        .crmeditable tbody tr td {
+            line-height: 25px;
+        }
+
+#editTableEditBox {
+}
+
+    #editTableEditBox .editable_editbox {
+        /*display:none;*/
+        position: absolute;
+    }
+
+        #editTableEditBox .editable_editbox select,
+        #editTableEditBox .editable_editbox input {
+            border: 2px solid #5292f7;
+            box-shadow: 1px 2px 5px rgba(0,0,0,0.4);
+            height: 100%;
+            width: 100%;
+        }
+
+.crmeditable td.rowcontrol a {
+    cursor: pointer;
+}
+
+.crmeditable a img {
+    border: none;
+}

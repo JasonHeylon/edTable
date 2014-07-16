@@ -1,0 +1,125 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="edTable/jquery.edTable.css" rel="stylesheet" />
+    <script src="jquery-1.8.2.min.js"></script>
+
+
+    <script src="edTable/jquery.edTable.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <div style="text-align:right;"> <a href="#" id="btnAddNewRow"><img style="border:none;" src="edTable/img/plus.png" alt="新增"></a></div>
+        <div id="myTable">
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+
+        function ShowEdtable(){
+            var url = "";
+            
+        }
+
+
+
+        var citySelection = [
+            { title: "分类一", value: "1" },
+            { title: "分类二", value: "2" },
+            { title: "分类三", value: "3" },
+            { title: "分类四", value: "4" }
+        ];
+
+        var boolSelection = [
+            {title: "是", value:"1"},
+            {title: "否", value:"0"}
+        ];
+
+
+        var columns = [
+            {
+               id:'1', name: "产品1", telephone1: "86868686", new_tele:"010 88888888", new_ke: "1", new_email: "test@test.com", new_zc: "2012-09-09", new_sfcz: "0"
+            },
+            {
+                 id:'2', name: "产品2", telephone1: "88558866", new_tele:"021 86838485", new_ke: "1", new_email: "test1@test.com", new_zc: "2012-10-11", new_sfcz: "1"
+            }
+        ];
+        var changedItem = {
+            id: '2',
+            totalDays: 8,
+        }
+
+
+        var headers = [
+            { title: "客户名称", name: "name", edit: true, type: "text" },
+            { title: "手机", name: "telephone1", edit: true, type: "text" },
+            { title: "住宅电话", name: "new_tele", edit: true, type: "text" },
+            { title: "是否潜客", name: "new_ke", edit: true, type: "select", selection: boolSelection },
+            { title: "Email", name: "new_email", edit: true, type: "text" },
+            { title: "注册时间", name: "new_zc", edit: true, type: "text" },
+            { title: "是否车主", name: "new_sfcz", edit: true, type: "select", selection: boolSelection },
+            // { title: "秒数选择", name: "adSecond", edit: true, type: "crmselect", logicName: "sohu_test", attribute: "adSecond" }
+        ];
+
+        var option = {
+            headers: headers,
+            columns: columns,
+            onDelete: function (id) {
+                //console.log(id);
+                //do ajax delete here;
+                $("#myTable").edTable("deleteDataRow", id);
+            },
+            onInsert: function (column) {
+                //console.log(column);
+                //do ajax insert here
+                //be notice column needs id;
+                column.totalAmount = parseFloat(column.price) * parseFloat(column.quantity);
+                $("#myTable").edTable("addNewDataRow", column);
+            },
+            onValueChange: function (dataRow, key) {
+                console.log(dataRow);
+                console.log("changed " + key + ": " + dataRow[key]);
+
+                dataRow.totalAmount = parseFloat(dataRow.price) * parseFloat(dataRow.quantity);
+                if (dataRow.totalAmount > 500) {
+                    $("#myTable").edTable("lockColumn", { id: dataRow.id, columnName: "city" });
+                }
+                else {
+                    $("#myTable").edTable("unlockColumn", { id: dataRow.id, columnName: "city" });
+                }
+                if (dataRow.price<0) {
+                    $("#myTable").edTable("updateDataRow", false);
+                    return;
+                }
+                //console.log(key);  //the key has been modified;
+                //do ajax update here
+                $("#myTable").edTable("updateDataRow", dataRow);
+            },
+            deleteImg:"edTable/img/trash.png",
+            saveImg:"edTable/img/save.png"
+
+        };
+
+        $(document).ready(function () {
+
+            $("#myTable").edTable(option, undefined);
+
+            $("#btnAddNewRow").click(NewRow);
+        });
+
+        function NewRow() {
+            $("#myTable").edTable("addNewRow");
+        }
+
+
+
+
+    </script>
+</body>
+</html>
